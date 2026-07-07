@@ -22,37 +22,69 @@ struct SemanticNotesTests {
         return ModelContext(container)
     }
 
-    @Test func 新規ノートは再インデックス対象として作られる() throws {
-        let repository = NoteRepository(modelContext: try makeContext())
-
-        let note = try repository.create(title: "買い物メモ", content: "牛乳と卵を買う")
-
+    @Test func Noteの初期状態は再インデックス待ちである() {
+        let note = Note(title: "買い物メモ", content: "牛乳と卵を買う")
         #expect(note.needsReindexing)
         #expect(note.chunks.isEmpty)
-        #expect(try repository.fetchAll().count == 1)
     }
 
-    @Test func 本文を変更したときだけ再インデックス対象になる() throws {
+    @Test func ノート作成時にチャンクが生成されフラグが下りる() throws {
         let repository = NoteRepository(modelContext: try makeContext())
-        let note = try repository.create(title: "旧タイトル", content: "本文A")
-        note.needsReindexing = false
 
-        // タイトルだけの変更ではフラグは立たない(埋め込みの作り直しは不要)
-        try repository.update(note, title: "新タイトル", content: "本文A")
+        let note = try repository.create(title: "打ち合わせ", content: "打ち合わせの記録。要点を短く残す。")
+
+        #expect(note.chunks.count == 1)
+        #expect(note.chunks.first?.content == "打ち合わせの記録。要点を短く残す。")
         #expect(!note.needsReindexing)
+    }
 
-        // 本文の変更でフラグが立つ
-        try repository.update(note, title: "新タイトル", content: "本文B")
-        #expect(note.needsReindexing)
+    @Test func 本文を変更するとチャンクが作り直され孤児が残らない() throws {
+        let context = try makeContext()
+        let repository = NoteRepository(modelContext: context)
+        let note = try repository.create(title: "メモ", content: "古い本文をここに書く。")
+
+        try repository.update(note, title: "メモ", content: "新しい本文に書き換えた。")
+
+        #expect(note.chunks.count == 1)
+        #expect(note.chunks.first?.content == "新しい本文に書き換えた。")
+        #expect(!note.needsReindexing)
+        // 古いチャンクがストアに残っていないこと(孤児チェック)
+        let allChunks = try context.fetch(FetchDescriptor<NoteChunk>())
+        #expect(allChunks.count == note.chunks.count)
+    }
+
+    @Test func タイトルのみの変更ではチャンクを再生成しない() throws {
+        let repository = NoteRepository(modelContext: try makeContext())
+        let note = try repository.create(title: "旧タイトル", content: "本文は変わらない。")
+        let chunkIDsBefore = Set(note.chunks.map(\.persistentModelID))
+
+        try repository.update(note, title: "新タイトル", content: "本文は変わらない。")
+
+        // チャンクのオブジェクトが同一のまま(作り直されていない)
+        #expect(Set(note.chunks.map(\.persistentModelID)) == chunkIDsBefore)
+        #expect(!note.needsReindexing)
+        #expect(note.title == "新タイトル")
+    }
+
+    @Test func 長いノートは複数チャンクへ連番で分割される() throws {
+        let repository = NoteRepository(modelContext: try makeContext())
+        // 段落10個(1段落あたり見積もり約50トークン)→ 既定予算300を超えて複数チャンクになる
+        let paragraphs = (1...10).map { index in
+            "第\(index)段落は端末内検索の設計判断を記録する。埋め込みは保存時に正規化し、検索時は内積だけで比較する。"
+        }
+        let note = try repository.create(title: "設計ノート", content: paragraphs.joined(separator: "\n"))
+
+        #expect(note.chunks.count >= 2)
+        // chunkIndex が 0 からの連番になっている(表示や順序復元の前提)
+        let indexes = note.chunks.map(\.chunkIndex).sorted()
+        #expect(indexes == Array(0..<note.chunks.count))
     }
 
     @Test func ノートを削除するとチャンクも連鎖して消える() throws {
         let context = try makeContext()
         let repository = NoteRepository(modelContext: context)
-        let note = try repository.create(title: "t", content: "c")
-        context.insert(NoteChunk(content: "チャンク1", chunkIndex: 0, note: note))
-        context.insert(NoteChunk(content: "chunk 2", chunkIndex: 1, note: note))
-        try context.save()
+        let note = try repository.create(title: "t", content: "削除対象の本文。チャンクも一緒に消えるはず。")
+        #expect(!note.chunks.isEmpty)
 
         try repository.delete(note)
 

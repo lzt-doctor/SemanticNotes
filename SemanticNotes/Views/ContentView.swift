@@ -55,7 +55,7 @@ struct ContentView: View {
     // Phase 0 ではエラー表示 UI は範囲外なので try? で握りつぶす。
     private func addNote() {
         let repository = NoteRepository(modelContext: modelContext)
-        try? repository.create(title: "", content: "")
+        _ = try? repository.create(title: "", content: "")
     }
 
     private func deleteNotes(at offsets: IndexSet) {
