@@ -28,4 +28,4 @@
 ### 計測結果
 
 - ローカル `xcodebuild test`(iPhone 17 シミュレータ / Xcode 26.6): **4件成功・0失敗**。テスト実行 0.035 秒、テストフェーズ全体 21.7 秒(初回ビルド込み)。
-- CI: GitHub リモート未設定のため未実行。リポジトリを GitHub に push した時点で Actions の初回実行を確認する。
+- CI: GitHub(lzt-doctor/SemanticNotes)へ push し、GitHub Actions の初回実行が成功(緑)であることを確認。ローカルと CI の両方でテストが緑になり、Phase 0 の完了条件を達成。

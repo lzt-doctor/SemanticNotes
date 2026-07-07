@@ -4,7 +4,7 @@
 
 ## 進捗
 
-- [ ] Phase 0: 環境確認と CI
+- [x] Phase 0: 環境確認と CI
 - [ ] Phase 1: チャンク分割
 - [ ] Phase 2: モデル変換パイプライン(Python)
 - [ ] Phase 3: EmbeddingService(Swift)
