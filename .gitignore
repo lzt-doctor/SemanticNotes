@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Xcode のユーザー状態(個人環境依存なので共有しない)
+xcuserdata/
+*.xcuserstate
+
+# ビルド生成物
+build/
+DerivedData/
+*.xcresult
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# モデル成果物(コミットしない。scripts/ から再生成可能に保つ — CLAUDE.md の制約)
+*.mlpackage
+*.mlmodelc
+
+# Python(scripts/ のモデル変換用)
+scripts/.venv/
+__pycache__/
+*.pyc
