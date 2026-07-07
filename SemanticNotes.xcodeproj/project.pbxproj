@@ -6,14 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		AA1000072FFD23A400827ABB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9207D61A2FFD23A400827ABB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9207D6212FFD23A400827ABB;
+			remoteInfo = SemanticNotes;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		9207D6222FFD23A400827ABB /* SemanticNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SemanticNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9207D6222FFD23A400827ABB /* SemanticNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SemanticNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1000012FFD23A400827ABB /* SemanticNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SemanticNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9207D6242FFD23A400827ABB /* SemanticNote */ = {
+		9207D6242FFD23A400827ABB /* SemanticNotes */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SemanticNote;
+			path = SemanticNotes;
+			sourceTree = "<group>";
+		};
+		AA1000022FFD23A400827ABB /* SemanticNotesTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SemanticNotesTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +42,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA1000052FFD23A400827ABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		9207D6192FFD23A400827ABB = {
 			isa = PBXGroup;
 			children = (
-				9207D6242FFD23A400827ABB /* SemanticNote */,
+				9207D6242FFD23A400827ABB /* SemanticNotes */,
+				AA1000022FFD23A400827ABB /* SemanticNotesTests */,
 				9207D6232FFD23A400827ABB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +64,8 @@
 		9207D6232FFD23A400827ABB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9207D6222FFD23A400827ABB /* SemanticNote.app */,
+				9207D6222FFD23A400827ABB /* SemanticNotes.app */,
+				AA1000012FFD23A400827ABB /* SemanticNotesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9207D6212FFD23A400827ABB /* SemanticNote */ = {
+		9207D6212FFD23A400827ABB /* SemanticNotes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9207D62D2FFD23A500827ABB /* Build configuration list for PBXNativeTarget "SemanticNote" */;
+			buildConfigurationList = 9207D62D2FFD23A500827ABB /* Build configuration list for PBXNativeTarget "SemanticNotes" */;
 			buildPhases = (
 				9207D61E2FFD23A400827ABB /* Sources */,
 				9207D61F2FFD23A400827ABB /* Frameworks */,
@@ -61,14 +86,37 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				9207D6242FFD23A400827ABB /* SemanticNote */,
+				9207D6242FFD23A400827ABB /* SemanticNotes */,
 			);
-			name = SemanticNote;
+			name = SemanticNotes;
 			packageProductDependencies = (
 			);
-			productName = SemanticNote;
-			productReference = 9207D6222FFD23A400827ABB /* SemanticNote.app */;
+			productName = SemanticNotes;
+			productReference = 9207D6222FFD23A400827ABB /* SemanticNotes.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AA1000032FFD23A400827ABB /* SemanticNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA1000092FFD23A400827ABB /* Build configuration list for PBXNativeTarget "SemanticNotesTests" */;
+			buildPhases = (
+				AA1000042FFD23A400827ABB /* Sources */,
+				AA1000052FFD23A400827ABB /* Frameworks */,
+				AA1000062FFD23A400827ABB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA1000082FFD23A400827ABB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AA1000022FFD23A400827ABB /* SemanticNotesTests */,
+			);
+			name = SemanticNotesTests;
+			packageProductDependencies = (
+			);
+			productName = SemanticNotesTests;
+			productReference = AA1000012FFD23A400827ABB /* SemanticNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,9 +131,13 @@
 					9207D6212FFD23A400827ABB = {
 						CreatedOnToolsVersion = 26.6;
 					};
+					AA1000032FFD23A400827ABB = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 9207D6212FFD23A400827ABB;
+					};
 				};
 			};
-			buildConfigurationList = 9207D61D2FFD23A400827ABB /* Build configuration list for PBXProject "SemanticNote" */;
+			buildConfigurationList = 9207D61D2FFD23A400827ABB /* Build configuration list for PBXProject "SemanticNotes" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,13 +151,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9207D6212FFD23A400827ABB /* SemanticNote */,
+				9207D6212FFD23A400827ABB /* SemanticNotes */,
+				AA1000032FFD23A400827ABB /* SemanticNotesTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9207D6202FFD23A400827ABB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA1000062FFD23A400827ABB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA1000042FFD23A400827ABB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA1000082FFD23A400827ABB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9207D6212FFD23A400827ABB /* SemanticNotes */;
+			targetProxy = AA1000072FFD23A400827ABB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9207D62B2FFD23A500827ABB /* Debug */ = {
@@ -177,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -234,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -263,14 +338,14 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -294,22 +369,60 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNote;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA10000A2FFD23A400827ABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SemanticNotes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SemanticNotes";
+			};
+			name = Debug;
+		};
+		AA10000B2FFD23A400827ABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dudu.SemanticNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SemanticNotes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SemanticNotes";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9207D61D2FFD23A400827ABB /* Build configuration list for PBXProject "SemanticNote" */ = {
+		9207D61D2FFD23A400827ABB /* Build configuration list for PBXProject "SemanticNotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9207D62B2FFD23A500827ABB /* Debug */,
@@ -318,11 +431,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9207D62D2FFD23A500827ABB /* Build configuration list for PBXNativeTarget "SemanticNote" */ = {
+		9207D62D2FFD23A500827ABB /* Build configuration list for PBXNativeTarget "SemanticNotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9207D62E2FFD23A500827ABB /* Debug */,
 				9207D62F2FFD23A500827ABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA1000092FFD23A400827ABB /* Build configuration list for PBXNativeTarget "SemanticNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA10000A2FFD23A400827ABB /* Debug */,
+				AA10000B2FFD23A400827ABB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
