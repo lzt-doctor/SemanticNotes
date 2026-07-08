@@ -23,7 +23,8 @@
 ### 動作確認
 
 - 全54テスト成功。シミュレータでは Foundation Models が `unavailable(appleIntelligenceNotEnabled)` を返し、**フォールバック経路が実環境で発動することを確認**(案内文も想定どおり表示)。
-- 対応実機(Apple Intelligence 有効)での生成は `FoundationModelIntegrationTests` が自動で有効化される。実機確認は次回の実機接続時に行う。
+- **手動確認(2026-07-08)**: 開発者の Mac は Apple Intelligence 非対応のためシミュレータでも回答生成は実行不可。その環境で Q&A 画面が正常に開き、質問に対して関連ノートが検索結果(根拠)として表示されることを確認 — **シミュレータでフォールバック動作と根拠提示は確認済み**。
+- **残タスク: 対応実機(Apple Intelligence 有効)での Foundation Models 生成の確認待ち**。確認が取れるまで PLAN の Phase 7 はチェックしない。対応実機では `FoundationModelIntegrationTests` が自動で有効化される。
 
 ### CI 障害と対処(2026-07-08 追記)
 
