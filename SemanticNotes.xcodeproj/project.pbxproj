@@ -90,6 +90,7 @@
 			);
 			name = SemanticNotes;
 			packageProductDependencies = (
+				AA2000022FFD23A400827ABB /* Transformers */,
 			);
 			productName = SemanticNotes;
 			productReference = 9207D6222FFD23A400827ABB /* SemanticNotes.app */;
@@ -146,6 +147,9 @@
 			);
 			mainGroup = 9207D6192FFD23A400827ABB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AA2000012FFD23A400827ABB /* XCRemoteSwiftPackageReference "swift-transformers" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9207D6232FFD23A400827ABB /* Products */;
 			projectDirPath = "";
@@ -450,6 +454,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA2000012FFD23A400827ABB /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA2000022FFD23A400827ABB /* Transformers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA2000012FFD23A400827ABB /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Transformers;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9207D61A2FFD23A400827ABB /* Project object */;
 }

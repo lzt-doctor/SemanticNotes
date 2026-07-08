@@ -17,6 +17,10 @@ DerivedData/
 # モデル成果物(コミットしない。scripts/ から再生成可能に保つ — CLAUDE.md の制約)
 *.mlpackage
 *.mlmodelc
+# トークナイザ成果物も同様に scripts/install_model.sh で再配置する
+SemanticNotes/Resources/tokenizer.json
+SemanticNotes/Resources/tokenizer_config.json
+SemanticNotes/Resources/special_tokens_map.json
 
 # Python(scripts/ のモデル変換用)
 scripts/.venv/
