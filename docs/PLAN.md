@@ -10,7 +10,7 @@
 - [x] Phase 3: EmbeddingService(Swift)
 - [x] Phase 4: 総当たり検索と検索 UI
 - [x] Phase 5: HNSW 自作
-- [ ] Phase 6: 評価
+- [x] Phase 6: 評価
 - [ ] Phase 7: Q&A(RAG)
 - [ ] Phase 8: 仕上げ
 
