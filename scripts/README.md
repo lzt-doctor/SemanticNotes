@@ -19,7 +19,11 @@ pip install -r requirements.txt
 
 python convert_model.py    # 変換: output/MultilingualE5Small.mlpackage を生成
 python validate_model.py   # 検証: PyTorch との一致確認 + 参照ベクトル JSON の書き出し
+./install_model.sh         # 配置: モデルとトークナイザを SemanticNotes/Resources/ へコピー
 ```
+
+配置後に Xcode でビルドすると、モデルはアプリへ同梱される。モデル未配置でもビルドと
+CI は通る(モデル依存のテストは自動スキップされる)。
 
 ## 各スクリプトがやること
 

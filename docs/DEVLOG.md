@@ -2,6 +2,28 @@
 
 フェーズごとに「やったこと / 迷った判断 / 計測結果」を記録する。
 
+## Phase 3: EmbeddingService(2026-07-08)
+
+### やったこと
+
+- `EmbeddingService` プロトコル(+ "query: " / "passage: " を付与する `embedQuery` / `embedPassage` ヘルパー)を定義し、実装を2つ用意:
+  - `CoreMLEmbeddingService`(actor): 同梱の tokenizer.json を swift-transformers で読み、Core ML で推論。512 トークン超は `</s>` を保って明示的に切り詰める。
+  - `MockEmbeddingService`: FNV-1a ベースの決定的な擬似ベクトル(正規化済み)。固定ベクトルの注入も可能で、上位層のテストに使う。
+- swift-transformers を SPM で追加。モデルとトークナイザは `scripts/install_model.sh` で `SemanticNotes/Resources/` へ配置(git 管理外)。CI などモデルの無い環境では、モデル依存テストを Swift Testing の `.enabled(if:)` で自動スキップ。
+- テスト5件追加(計21件): トークナイザの完全一致、参照ベクトルとのコサイン一致、時間計測、モック2件。
+
+### 迷った判断
+
+- **swift-transformers のバージョン**: 最初 0.1.24 で入れたところ、`XLMRobertaTokenizer` がトークナイザレジストリ未登録で `unsupportedTokenizer` エラー。tokenizer_config.json の class 名を偽装する回避策(同じ Unigram 系の T5Tokenizer に振る)も検討したが、**1.3.3 で正式対応済み**と確認できたため、依存のバージョンを上げる正道を選んだ。1.x では推移的依存(swift-nio 等、Hub のダウンロード機能向け)が増えるが、アプリは Tokenizers 部分しか使わない。
+- **トークナイザ不一致の検証方法**: コサイン類似度でなく**トークン ID の完全一致**で判定。不一致は「わずかに違うベクトル」という静かな壊れ方をするため、入口で厳密に検証する。
+- **自動生成モデルクラスを使わない**: Xcode の codegen クラスを参照するとモデル未配置の CI でコンパイルが壊れるため、`MLModel(contentsOf:)` + バンドル検索で実行時解決にした。
+
+### 計測結果(iPhone 17 シミュレータ / M系 Mac、ウォームアップ後5回平均)
+
+- トークナイザ: Python(HF fast tokenizer)と**全8ケースでトークン ID 完全一致**。
+- 埋め込み精度: PyTorch FP32 参照とコサイン **> 0.999**(全8ケース)、ノルム 1.000±0.01。
+- 埋め込み時間: **クエリ(13トークン)約 30ms/回、チャンク相当の長文(165トークン)約 87ms/回**。可変長入力の効果でクエリは長文の約1/3の時間。実機での計測は Phase 4/6 で行う。
+
 ## Phase 2: モデル変換パイプライン(2026-07-08)
 
 ### やったこと
