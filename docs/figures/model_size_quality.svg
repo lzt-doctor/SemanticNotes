@@ -1,0 +1,18 @@
+<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, 'Hiragino Sans', sans-serif" font-size="13">
+  <rect width="640" height="400" fill="#ffffff"/>
+  <text x="60" y="24" fill="#333" font-size="14" font-weight="600">モデルサイズと検索品質(量子化の影響)</text>
+  <line x1="60" y1="340" x2="600" y2="340" stroke="#999" stroke-width="1"/>
+  <rect x="110" y="58" width="110" height="282" fill="#c9c7c0"/>
+  <text x="165" y="50" text-anchor="middle" fill="#666">470 MB</text>
+  <text x="165" y="360" text-anchor="middle" fill="#333">FP32(参考: 変換前)</text>
+  <text x="165" y="378" text-anchor="middle" fill="#999" font-size="12">PyTorch 原本</text>
+  <rect x="270" y="199" width="110" height="141" fill="#0F6E56"/>
+  <text x="325" y="191" text-anchor="middle" fill="#0F6E56" font-weight="600">235.3 MB</text>
+  <text x="325" y="360" text-anchor="middle" fill="#333">FP16(アプリ採用)</text>
+  <text x="325" y="378" text-anchor="middle" fill="#666" font-size="12">nDCG@10 0.690 / cos 0.999993</text>
+  <rect x="430" y="269" width="110" height="71" fill="#534AB7"/>
+  <text x="485" y="261" text-anchor="middle" fill="#534AB7" font-weight="600">118.5 MB</text>
+  <text x="485" y="360" text-anchor="middle" fill="#333">INT8(weight-only)</text>
+  <text x="485" y="378" text-anchor="middle" fill="#666" font-size="12">nDCG@10 0.686 / cos 0.999832</text>
+  <text x="60" y="396" fill="#999" font-size="12">cos = PyTorch FP32 出力との最小コサイン類似度(自作検証8文)。recall@10 は 3 者とも 0.85 で不変。</text>
+</svg>

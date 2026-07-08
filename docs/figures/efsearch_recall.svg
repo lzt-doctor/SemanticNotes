@@ -1,0 +1,36 @@
+<svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, 'Hiragino Sans', sans-serif" font-size="13">
+  <rect width="640" height="400" fill="#ffffff"/>
+  <text x="80" y="24" fill="#333" font-size="14" font-weight="600">efSearch と recall@10(N=5,000, M=16, efC=200)— データ分布による違い</text>
+  <line x1="80" y1="340" x2="600" y2="340" stroke="#999" stroke-width="1"/>
+  <line x1="80" y1="40" x2="80" y2="340" stroke="#999" stroke-width="1"/>
+  <line x1="80" y1="77.5" x2="600" y2="77.5" stroke="#999" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="86" y="72" fill="#666">目標 recall ≥ 0.95</text>
+  <g fill="#666">
+    <text x="72" y="44" text-anchor="end">1.0</text>
+    <text x="72" y="119" text-anchor="end">0.9</text>
+    <text x="72" y="194" text-anchor="end">0.8</text>
+    <text x="72" y="269" text-anchor="end">0.7</text>
+    <text x="72" y="344" text-anchor="end">0.6</text>
+    <text x="80" y="360" text-anchor="middle">10</text>
+    <text x="142" y="360" text-anchor="middle">16</text>
+    <text x="234" y="360" text-anchor="middle">32</text>
+    <text x="325" y="360" text-anchor="middle">64</text>
+    <text x="417" y="360" text-anchor="middle">128</text>
+    <text x="508" y="360" text-anchor="middle">256</text>
+    <text x="600" y="360" text-anchor="middle">512</text>
+    <text x="340" y="384" text-anchor="middle">efSearch(対数目盛)</text>
+  </g>
+  <polyline points="80,50.5 142,43 234,40 325,40 417,40" fill="none" stroke="#0F6E56" stroke-width="2"/>
+  <circle cx="80" cy="50.5" r="4" fill="#0F6E56"/>
+  <circle cx="142" cy="43" r="4" fill="#0F6E56"/>
+  <circle cx="234" cy="40" r="4" fill="#0F6E56"/>
+  <circle cx="325" cy="40" r="4" fill="#0F6E56"/>
+  <circle cx="417" cy="40" r="4" fill="#0F6E56"/>
+  <text x="240" y="62" fill="#0F6E56">クラスタ構造データ(実際の文埋め込みに近い): efS=10 でも 0.986</text>
+  <polyline points="325,284.5 417,142 508,62.5 600,40" fill="none" stroke="#D85A30" stroke-width="2"/>
+  <circle cx="325" cy="284.5" r="4" fill="#D85A30"/>
+  <circle cx="417" cy="142" r="4" fill="#D85A30"/>
+  <circle cx="508" cy="62.5" r="4" fill="#D85A30"/>
+  <circle cx="600" cy="40" r="4" fill="#D85A30"/>
+  <text x="330" y="304" fill="#D85A30">一様ランダム(最悪ケース): efS を払えば回復する</text>
+</svg>
