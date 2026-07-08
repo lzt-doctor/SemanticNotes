@@ -42,6 +42,13 @@ struct ContentView: View {
                         Label("意味検索", systemImage: "magnifyingglass")
                     }
                 }
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        QAView()
+                    } label: {
+                        Label("ノートに質問", systemImage: "sparkles")
+                    }
+                }
                 ToolbarItem {
                     Button("追加", systemImage: "plus", action: addNote)
                 }
