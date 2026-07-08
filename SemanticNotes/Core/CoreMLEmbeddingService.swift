@@ -27,12 +27,14 @@ actor CoreMLEmbeddingService: EmbeddingService {
     private let model: MLModel
     private let tokenizer: any Tokenizer
 
-    init(bundle: Bundle = .main) throws {
+    /// - Parameter modelName: 読み込むモデル資源名。評価では INT8 量子化版
+    ///   ("MultilingualE5SmallInt8")と切り替えて品質・速度を比較する。
+    init(bundle: Bundle = .main, modelName: String = "MultilingualE5Small") throws {
         // Xcode が .mlpackage をコンパイルした .mlmodelc をバンドルから読む。
         // 自動生成クラスを使わないのは、モデル未配置の環境(CI)でも
         // コンパイルが通る状態を保つため。
-        guard let modelURL = bundle.url(forResource: "MultilingualE5Small", withExtension: "mlmodelc") else {
-            throw EmbeddingError.resourceNotFound("MultilingualE5Small.mlmodelc")
+        guard let modelURL = bundle.url(forResource: modelName, withExtension: "mlmodelc") else {
+            throw EmbeddingError.resourceNotFound("\(modelName).mlmodelc")
         }
         self.model = try MLModel(contentsOf: modelURL, configuration: MLModelConfiguration())
         self.tokenizer = try Self.loadTokenizer(from: bundle)
