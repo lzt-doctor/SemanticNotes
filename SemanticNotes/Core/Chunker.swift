@@ -11,7 +11,9 @@ import NaturalLanguage
 /// 方針: 段落(行)を基本単位とし、上限を超える段落だけ文単位へ、句読点のない
 /// 極端に長い文だけ強制分割する3段フォールバック。予算(targetTokens)まで単位を
 /// 詰め、チャンク境界では直前チャンク末尾の単位をオーバーラップとして重複させる。
-struct Chunker {
+/// なぜ nonisolated か: 状態を持たない純粋な処理で、アクター外(RAG のプロンプト
+/// 構築など)からも同期的に使うため。
+nonisolated struct Chunker {
     struct Configuration {
         /// 1チャンクに詰める見積もりトークン数の目標(超えそうになったら区切る)
         var targetTokens: Int

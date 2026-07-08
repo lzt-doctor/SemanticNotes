@@ -19,6 +19,14 @@ final class SearchIndexService {
         var id: PersistentIdentifier { note.persistentModelID }
     }
 
+    /// 検索結果(チャンク単位)。RAG の根拠にはこちらを使う。
+    struct ChunkHit: Identifiable {
+        let note: Note
+        let chunk: NoteChunk
+        let score: Float
+        var id: UUID { chunk.chunkID }
+    }
+
     private let modelContext: ModelContext
     private let embedder: any EmbeddingService
     private let index: any VectorIndex
@@ -58,15 +66,14 @@ final class SearchIndexService {
         return embeddedCount
     }
 
-    /// 意味検索。クエリに "query: " を付与して埋め込み、チャンク単位の上位候補を
-    /// ノート単位へ畳んで返す(1ノートにつき最良チャンクのスコアを採用)。
-    func search(_ text: String, limit: Int = 10) async throws -> [NoteHit] {
+    /// 意味検索(チャンク単位)。クエリに "query: " を付与して埋め込み、
+    /// スコア降順の上位チャンクをノートへの参照付きで返す。
+    func topChunks(for text: String, limit: Int) async throws -> [ChunkHit] {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return [] }
+        guard !trimmed.isEmpty, limit > 0 else { return [] }
 
         let queryVector = try await embedder.embedQuery(trimmed)
-        // ノート単位に畳むと件数が減るため、チャンク候補は表示件数より多めに取る
-        let hits = await index.search(queryVector, k: max(limit * 5, 30))
+        let hits = await index.search(queryVector, k: limit)
         guard !hits.isEmpty else { return [] }
 
         let hitIDs = hits.map(\.id)
@@ -75,13 +82,24 @@ final class SearchIndexService {
         )
         let chunkByID = Dictionary(uniqueKeysWithValues: chunks.map { ($0.chunkID, $0) })
 
+        // ストアに存在しない ID(万一の索引の残骸)はここで無害化される
+        return hits.compactMap { hit in
+            guard let chunk = chunkByID[hit.id], let note = chunk.note else { return nil }
+            return ChunkHit(note: note, chunk: chunk, score: hit.score)
+        }
+    }
+
+    /// 意味検索(ノート単位)。チャンク単位の上位候補をノートへ畳み、
+    /// 1ノートにつき最良チャンクのスコアと抜粋を採用する。
+    func search(_ text: String, limit: Int = 10) async throws -> [NoteHit] {
+        // ノート単位に畳むと件数が減るため、チャンク候補は表示件数より多めに取る
+        let hits = try await topChunks(for: text, limit: max(limit * 5, 30))
+
         var bestPerNote: [PersistentIdentifier: NoteHit] = [:]
         for hit in hits {
-            // ストアに存在しない ID(万一の索引の残骸)はここで無害化される
-            guard let chunk = chunkByID[hit.id], let note = chunk.note else { continue }
-            let noteID = note.persistentModelID
+            let noteID = hit.note.persistentModelID
             if let current = bestPerNote[noteID], current.score >= hit.score { continue }
-            bestPerNote[noteID] = NoteHit(note: note, excerpt: chunk.content, score: hit.score)
+            bestPerNote[noteID] = NoteHit(note: hit.note, excerpt: hit.chunk.content, score: hit.score)
         }
         return bestPerNote.values
             .sorted { $0.score > $1.score }
