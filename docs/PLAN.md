@@ -7,7 +7,7 @@
 - [x] Phase 0: 環境確認と CI
 - [x] Phase 1: チャンク分割
 - [x] Phase 2: モデル変換パイプライン(Python)
-- [ ] Phase 3: EmbeddingService(Swift)
+- [x] Phase 3: EmbeddingService(Swift)
 - [ ] Phase 4: 総当たり検索と検索 UI
 - [ ] Phase 5: HNSW 自作
 - [ ] Phase 6: 評価
