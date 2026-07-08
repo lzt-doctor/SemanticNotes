@@ -35,6 +35,13 @@ struct ContentView: View {
                 NoteEditorView(note: note)
             }
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        SearchView()
+                    } label: {
+                        Label("意味検索", systemImage: "magnifyingglass")
+                    }
+                }
                 ToolbarItem {
                     Button("追加", systemImage: "plus", action: addNote)
                 }
