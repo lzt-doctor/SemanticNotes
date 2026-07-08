@@ -14,6 +14,12 @@ DEST="../SemanticNotes/Resources"
 mkdir -p "$DEST"
 rm -rf "$DEST/MultilingualE5Small.mlpackage"
 cp -R output/MultilingualE5Small.mlpackage "$DEST/"
+
+# INT8 量子化版(quantize_model.py 実行後に存在)は評価用に任意で配置する
+if [ -d output/MultilingualE5SmallInt8.mlpackage ]; then
+  rm -rf "$DEST/MultilingualE5SmallInt8.mlpackage"
+  cp -R output/MultilingualE5SmallInt8.mlpackage "$DEST/"
+fi
 cp output/tokenizer/tokenizer.json "$DEST/"
 cp output/tokenizer/tokenizer_config.json "$DEST/"
 if [ -f output/tokenizer/special_tokens_map.json ]; then
