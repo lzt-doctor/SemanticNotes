@@ -25,6 +25,9 @@ struct ContentView: View {
                                     .foregroundStyle(.secondary)
                                     .lineLimit(2)
                             }
+                            Text(note.updatedAt, format: .relative(presentation: .named))
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
                         }
                     }
                 }

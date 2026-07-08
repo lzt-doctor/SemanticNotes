@@ -71,6 +71,13 @@ struct SearchView: View {
                 )
             } else if viewModel.hasSearched && viewModel.results.isEmpty {
                 ContentUnavailableView.search(text: viewModel.query)
+            } else if !viewModel.hasSearched && viewModel.results.isEmpty {
+                // 検索前の初期状態: 何ができる画面かを初見の人に伝える
+                ContentUnavailableView(
+                    "意味で探す",
+                    systemImage: "sparkle.magnifyingglass",
+                    description: Text("同じ単語でなくても、意味が近いノートが見つかります。\n例:「料理の手順」→ カレーのレシピ")
+                )
             } else {
                 ForEach(viewModel.results) { hit in
                     NavigationLink(value: hit.note) {
@@ -79,10 +86,13 @@ struct SearchView: View {
                                 Text(hit.note.title.isEmpty ? String(localized: "無題") : hit.note.title)
                                     .font(.headline)
                                 Spacer()
-                                // 類似度は開発中の手がかりとして表示(仕上げ時に見直す)
-                                Text(String(format: "%.3f", hit.score))
-                                    .font(.caption.monospacedDigit())
-                                    .foregroundStyle(.secondary)
+                                // 類似度スコア(コサイン類似度)を関連度バッジとして表示
+                                Text(String(format: "%.2f", hit.score))
+                                    .font(.caption2.monospacedDigit())
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(.tint.opacity(0.15), in: Capsule())
+                                    .foregroundStyle(.tint)
                             }
                             Text(hit.excerpt)
                                 .font(.subheadline)
