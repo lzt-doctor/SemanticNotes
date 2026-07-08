@@ -21,6 +21,10 @@ jobs:
           xcodebuild -version
 
       - name: Build & Test
+        env:
+          # ランナーは Foundation Models を「利用可能」と報告するが、ヘッドレス環境では
+          # 実際の生成が失敗する。実生成テストは対応実機・ローカルでのみ実行する
+          TEST_RUNNER_SKIP_FM_TESTS: "1"
         run: |
           xcodebuild \
             -project SemanticNotes.xcodeproj \

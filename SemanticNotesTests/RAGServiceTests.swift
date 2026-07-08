@@ -9,9 +9,14 @@ import Testing
 
 @testable import SemanticNotes
 
-/// Foundation Models が使える環境(対応実機など)でだけ実生成テストを動かす
+/// Foundation Models が使える環境(対応実機など)でだけ実生成テストを動かす。
+/// なぜ SKIP_FM_TESTS も見るか: GitHub Actions のランナーは availability を
+/// 「利用可能」と報告するのに、ヘッドレス環境では実際の生成が GenerationError で
+/// 失敗する。availability API だけでは実行可否を判定しきれないため、
+/// CI 側(ci.yml)から明示的にスキップさせる。
 private nonisolated(unsafe) let foundationModelAvailable: Bool =
     FoundationModelAnswerGenerator().availability == .available
+        && ProcessInfo.processInfo.environment["SKIP_FM_TESTS"] != "1"
 
 struct RAGPromptBuilderTests {
     private func source(_ id: String, title: String, excerpt: String) -> RAGSource {
