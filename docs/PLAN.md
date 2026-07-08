@@ -8,7 +8,7 @@
 - [x] Phase 1: チャンク分割
 - [x] Phase 2: モデル変換パイプライン(Python)
 - [x] Phase 3: EmbeddingService(Swift)
-- [ ] Phase 4: 総当たり検索と検索 UI
+- [x] Phase 4: 総当たり検索と検索 UI
 - [ ] Phase 5: HNSW 自作
 - [ ] Phase 6: 評価
 - [ ] Phase 7: Q&A(RAG)
