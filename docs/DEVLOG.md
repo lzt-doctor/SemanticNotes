@@ -25,6 +25,12 @@
 - 全54テスト成功。シミュレータでは Foundation Models が `unavailable(appleIntelligenceNotEnabled)` を返し、**フォールバック経路が実環境で発動することを確認**(案内文も想定どおり表示)。
 - 対応実機(Apple Intelligence 有効)での生成は `FoundationModelIntegrationTests` が自動で有効化される。実機確認は次回の実機接続時に行う。
 
+### CI 障害と対処(2026-07-08 追記)
+
+- Phase 7 の push で CI が exit code 65 で失敗。原因は実生成テストで、**GitHub のランナーは `SystemLanguageModel.availability` を「利用可能」と報告するのに、ヘッドレス環境では生成が `GenerationError Code=-1` で失敗する**ため。「利用可否 API が真でも生成が成功するとは限らない」環境が存在するという学び。
+- 対処: ci.yml から `TEST_RUNNER_SKIP_FM_TESTS=1` を渡し、CI では実生成テストを明示スキップ(実機・ローカルは自動判定のまま)。修正後の CI は緑を確認。
+- アプリ側は同種の環境でも QAView が生成エラーを catch して案内を出し、検索と根拠表示は影響を受けない。
+
 ## Phase 6: 評価(2026-07-08)
 
 ### やったこと
