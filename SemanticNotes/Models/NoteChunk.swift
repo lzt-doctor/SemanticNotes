@@ -11,6 +11,11 @@ import SwiftData
 /// 話題が平均化されて検索精度が落ちるため、意味のまとまりごとに分けて索引する。
 @Model
 final class NoteChunk {
+    /// ベクトルインデックス側からこのチャンクを指すための安定 ID。
+    /// なぜ SwiftData の persistentModelID でなく UUID か: インデックス(Phase 5 では
+    /// ディスク永続化もする)を SwiftData の内部表現から切り離しておくため。
+    var chunkID: UUID
+
     var content: String
 
     /// ノート内での出現順。オーバーラップ付き分割でも元の並びを復元できるようにする。
@@ -24,6 +29,7 @@ final class NoteChunk {
     var note: Note?
 
     init(content: String, chunkIndex: Int, note: Note? = nil) {
+        self.chunkID = UUID()
         self.content = content
         self.chunkIndex = chunkIndex
         self.note = note
