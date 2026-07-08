@@ -1,0 +1,8 @@
+# モデル変換パイプラインの依存(バージョン固定)
+# なぜこの組み合わせか: システム Python 3.9(macOS 標準)で動作する
+# cp39 / macOS arm64 ホイールが揃っており、かつ torch は
+# coremltools 8.3.0 がテスト済みと明言する最新版(2.5.0)に合わせた。
+torch==2.5.0
+transformers==4.53.0
+coremltools==8.3.0
+numpy==1.26.4

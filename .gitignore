@@ -20,5 +20,6 @@ DerivedData/
 
 # Python(scripts/ のモデル変換用)
 scripts/.venv/
+scripts/output/
 __pycache__/
 *.pyc
