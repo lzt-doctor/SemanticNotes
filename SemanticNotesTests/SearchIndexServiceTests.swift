@@ -107,6 +107,34 @@ struct SearchIndexServiceTests {
     }
 }
 
+// MARK: - HNSW への差し替え(VectorIndex プロトコルの意義の証明)
+
+@MainActor
+struct HNSWDropInTests {
+    /// インデックスを HNSW に差し替えても検索パイプラインがそのまま動くこと
+    @Test func HNSWはBruteForceと差し替えて動く() async throws {
+        let context = try makeContext()
+        let repository = NoteRepository(modelContext: context)
+        try repository.create(title: "果樹", content: "りんごの栽培メモ。水やりは朝にする。")
+        try repository.create(title: "車", content: "オイル交換の記録。次回は来年の春。")
+
+        let service = SearchIndexService(
+            modelContext: context,
+            embedder: MockEmbeddingService(dimension: 3, fixedVectors: [
+                "passage: りんごの栽培メモ。水やりは朝にする。": [1, 0, 0],
+                "passage: オイル交換の記録。次回は来年の春。": [0, 1, 0],
+                "query: 果物の育て方": [0.99, 0.14, 0],
+            ]),
+            index: HNSWIndex(dimension: 3, configuration: .init(m: 8, efConstruction: 32, efSearch: 16, seed: 1))
+        )
+        try await service.refreshIndex()
+
+        let hits = try await service.search("果物の育て方")
+        #expect(hits.count == 2)
+        #expect(hits.first?.note.title == "果樹")
+    }
+}
+
 // MARK: - 実モデルでの意味検索(完了条件「実データで意味検索が動く」の証拠)
 
 @Suite(.enabled(if: realModelAvailable, "モデル未配置(scripts/install_model.sh の実行後に有効)"))
