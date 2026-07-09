@@ -17,9 +17,12 @@
   Foundation Models 非対応環境を前提に、生成あり(8a)/フォールバック(8b)の両筋書きを用意。機内モードで
   「通信ゼロ」を実演するカットを含む。
 - **配布準備**(`docs/DISTRIBUTION.md`): TestFlight チェックリスト。プライバシー申告(データ収集なし)、
-  Export Compliance、INT8 版への切り替え、アイコンなどの残タスクを明記。
+  Export Compliance、INT8 版への切り替えなどの残タスクを明記。
 - ビルド設定に `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO` を追加(通信・独自暗号なしのため正当。
   TestFlight のたびの輸出コンプライアンス申告を省ける)。
+- **App アイコンを作成**(`docs/app_icon/`): ノート(カード)の中身を意味グラフにしたデザイン(青〜紫系・
+  文字なし・他社ロゴなし)。SVG 原本を macOS 内蔵 `qlmanage` で PNG 化し、Pillow の `convert('RGB')` で
+  App Store 検証向けに alpha を除去。`AppIcon.appiconset` に単一 1024 構成で配置。
 
 ### 迷った判断
 
@@ -34,6 +37,8 @@
 ### 動作確認
 
 - UI 変更後も全54テスト成功。ビルドも成功。
+- **App アイコンのホーム画面表示を確認済み**(2026-07-08、シミュレータ)。角丸マスク適用後も意匠が崩れず、
+  カード＋意味グラフ＋きらめきが視認できることを確認。配置後の PNG は `hasAlpha: no` を確認済み。
 - Foundation Models の実機生成(Phase 7 残タスク)は引き続き未確認。
 
 ## Phase 7: Q&A(RAG)(2026-07-08)
