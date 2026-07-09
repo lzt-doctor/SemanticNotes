@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23307E"/>
+      <stop offset="0.55" stop-color="#3A2F94"/>
+      <stop offset="1" stop-color="#5A2E9C"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="512" cy="440" r="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8E9CFF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#8E9CFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card" x1="512" y1="206" x2="512" y2="818" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBFCFF"/>
+      <stop offset="1" stop-color="#E7EEFC"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F86F0"/>
+      <stop offset="1" stop-color="#8A5CF0"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="512" cy="520" r="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7FE0FF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#7FE0FF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7FE0FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="core" cx="512" cy="512" r="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.7" stop-color="#EAF6FF"/>
+      <stop offset="1" stop-color="#B9E4FF"/>
+    </radialGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#0B1240" flood-opacity="0.38"/>
+    </filter>
+    <filter id="sparkGlow" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#bgGlow)"/>
+
+  <!-- ノート(カード): ドキュメントと分かる角丸縦長カード -->
+  <g filter="url(#cardShadow)">
+    <rect x="300" y="206" width="424" height="612" rx="58" fill="url(#card)"/>
+  </g>
+  <rect x="300" y="206" width="424" height="612" rx="58" fill="none" stroke="#C9D6F5" stroke-width="3"/>
+
+  <!-- リンク(意味の近さ): 中央クエリから近傍ノードへの放射 + 周辺のつながり -->
+  <g stroke="#6E7BE8" stroke-opacity="0.55" stroke-width="9" stroke-linecap="round" fill="none">
+    <line x1="512" y1="520" x2="452" y2="352"/>
+    <line x1="512" y1="520" x2="366" y2="500"/>
+    <line x1="512" y1="520" x2="398" y2="662"/>
+    <line x1="512" y1="520" x2="560" y2="704"/>
+    <line x1="512" y1="520" x2="648" y2="572"/>
+    <line x1="452" y1="352" x2="366" y2="500"/>
+    <line x1="560" y1="704" x2="648" y2="572"/>
+  </g>
+
+  <!-- 周囲ノード(意味的近傍) -->
+  <g fill="url(#node)">
+    <circle cx="452" cy="352" r="26"/>
+    <circle cx="366" cy="500" r="28"/>
+    <circle cx="398" cy="662" r="26"/>
+    <circle cx="560" cy="704" r="23"/>
+    <circle cx="648" cy="572" r="30"/>
+  </g>
+
+  <!-- 中央ノード(検索クエリ / AI が見つけた一致): 発光する -->
+  <circle cx="512" cy="520" r="150" fill="url(#coreGlow)"/>
+  <circle cx="512" cy="512" r="52" fill="url(#core)"/>
+
+  <!-- きらめき(AI): 主 + 従 の4点スター。ノードと重ならない余白に配置 -->
+  <path d="M636 300 L659 356 L715 372 L659 388 L636 444 L613 388 L557 372 L613 356 Z"
+        fill="#CFF4FF" filter="url(#sparkGlow)"/>
+  <path d="M636 306 L657 357 L708 372 L657 387 L636 438 L615 387 L564 372 L615 357 Z"
+        fill="#FFFFFF"/>
+  <path d="M388 266 L399 289 L422 300 L399 311 L388 334 L377 311 L354 300 L377 289 Z"
+        fill="#FFFFFF"/>
+  <path d="M688 470 L695 489 L714 496 L695 503 L688 522 L681 503 L662 496 L681 489 Z"
+        fill="#EAFBFF"/>
+</svg>

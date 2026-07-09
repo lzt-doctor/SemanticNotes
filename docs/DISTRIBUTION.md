@@ -25,7 +25,8 @@
 
 ### アプリアイコン
 
-- [ ] `Assets.xcassets/AppIcon` に実アイコンを設定(現在はプレースホルダ)。TestFlight 提出にはアイコン必須
+- [x] `Assets.xcassets/AppIcon` に実アイコンを設定(1024px、alpha 除去済み)。原本は
+      [docs/app_icon/](../docs/app_icon/)(SVG・コンセプト付き)
 
 ### プライバシー(このアプリの要)
 
@@ -51,6 +52,5 @@
 
 ## 既知の残タスク
 
-- アプリアイコンのデザイン(現状プレースホルダ)
 - 対応実機での Foundation Models 生成の最終確認(Phase 7 の残タスク)
 - CI の `actions/checkout` が出す Node ランタイムの非推奨警告(動作影響なし。将来のアクション更新で解消)
